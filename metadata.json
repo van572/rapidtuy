@@ -1,0 +1,6 @@
+{
+  "name": "RapidTuy",
+  "description": "Sistema de gestión y monitoreo en tiempo real para mototaxis RapidTuy: panel de control administrativo, despacho APK, cobros y métricas de servicio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

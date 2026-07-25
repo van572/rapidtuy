@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RapidTuy - Sistema de Mototaxis Valles del Tuy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            ⚡ RAPID<span>TUY</span>
+        </a>
+        <div class="status-badge">
+            <div class="status-dot"></div>
+            <span>CENTRAL OPERATIVA 24/7</span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Tu Red de Mototaxis en los <span>Valles del Tuy</span></h1>
+        <p>Servicio rápido, verificado y seguro para Charallave, Cúa, Ocumare, Santa Teresa y San Antonio de Yare. Monitoreo por QR y despacho centralizado.</p>
+        
+        <div class="cta-group">
+            <a href="https://wa.me/584261215060?text=Hola%20RapidTuy%20deseo%20solicitar%20un%20servicio%20de%20moto" class="btn btn-whatsapp" id="heroWhatsappBtn" target="_blank">
+                💬 Pedir Moto por WhatsApp
+            </a>
+            <a href="https://ais-dev-k7q6427t2vsl3nsbjp7e4k-437635375840.us-west2.run.app" class="btn btn-primary" target="_blank">
+                📱 Abrir App en Vivo
+            </a>
+        </div>
+    </section>
+
+    <!-- Interactive Fare Estimator -->
+    <div class="calculator-card">
+        <div class="calculator-title">
+            <span>🧮</span> Estimador de Tarifa Inmediata
+        </div>
+
+        <div class="form-group">
+            <label for="origin">Lugar de Origen</label>
+            <select id="origin" class="form-control">
+                <option value="charallave_centro">Charallave Centro / Ferrocarril</option>
+                <option value="ferro_cua" selected>Estación Ferrocarril Cúa</option>
+                <option value="ocumare_centro">Ocumare del Tuy Centro</option>
+                <option value="santa_teresa">Santa Teresa del Tuy</option>
+                <option value="yare">San Antonio de Yare</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="destination">Lugar de Destino</label>
+            <select id="destination" class="form-control">
+                <option value="charallave_centro" selected>Charallave Centro / Ferrocarril</option>
+                <option value="ferro_cua">Estación Ferrocarril Cúa</option>
+                <option value="ocumare_centro">Ocumare del Tuy Centro</option>
+                <option value="santa_teresa">Santa Teresa del Tuy</option>
+                <option value="yare">San Antonio de Yare</option>
+            </select>
+        </div>
+
+        <div class="estimate-result">
+            <div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">TARIFA ESTIMADA</div>
+                <div class="estimate-price" id="farePrice">$4.00</div>
+            </div>
+            <div id="estimatedTime" style="color: var(--accent-blue); font-weight: 700; font-size: 0.95rem;">
+                ⏱️ Tiempo est.: ~16 min
+            </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+            <a href="#" id="requestWhatsappBtn" class="btn btn-whatsapp" style="width: 100%; justify-content: center;" target="_blank">
+                🚀 Pedir Servicio Ahora
+            </a>
+        </div>
+    </div>
+
+    <section class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-title">Conductores Validados</div>
+            <div class="feature-desc">Cada conductor posee número de chaleco asignado, datos en regla y verificación QR de solvencia semanal.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <div class="feature-title">Despacho Inmediato</div>
+            <div class="feature-desc">Asignación mediante algoritmo de proximidad para minimizar los tiempos de espera.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💳</div>
+            <div class="feature-title">Pago Flexible</div>
+            <div class="feature-desc">Aceptamos Pago Móvil, Efectivo en Bolívares y Divisas al finalizar cada trayecto.</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 RapidTuy C.A. - Red Oficial de Traslado de Pasajeros. Valles del Tuy, Venezuela.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
