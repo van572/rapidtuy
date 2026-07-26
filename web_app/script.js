@@ -7,13 +7,20 @@ function closePromoModal() {
     if (modal) modal.style.display = 'none';
 }
 function copyPromoUrl() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-        alert('✅ Enlace copiado al portapapeles: ' + url);
+    const promoUrl = window.location.origin + window.location.pathname + '#promo';
+    navigator.clipboard.writeText(promoUrl).then(() => {
+        alert('✅ Enlace promocional con afiche copiado: ' + promoUrl);
     }).catch(() => {
-        alert('Enlace: ' + url);
+        alert('Enlace: ' + promoUrl);
     });
 }
+
+// Check URL hash on page load to open promo modal if scanned via QR (#promo or #areaPublicitaria)
+window.addEventListener('load', () => {
+    if (window.location.hash === '#promo' || window.location.hash === '#areaPublicitaria' || window.location.search.includes('promo=1')) {
+        openPromoModal();
+    }
+});
 
 async function shareRapidTuy() {
     const shareData = {
@@ -42,6 +49,12 @@ async function shareRapidTuy() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const advertisingQrImg = document.getElementById('advertisingQrImg');
+    if (advertisingQrImg) {
+        const promoTargetUrl = window.location.origin + window.location.pathname + '#promo';
+        advertisingQrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(promoTargetUrl);
+    }
+
     const originSelect = document.getElementById('origin');
     const destinationSelect = document.getElementById('destination');
     const farePrice = document.getElementById('farePrice');
