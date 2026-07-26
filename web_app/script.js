@@ -7,11 +7,11 @@ function closePromoModal() {
     if (modal) modal.style.display = 'none';
 }
 function copyPromoUrl() {
-    const promoUrl = window.location.origin + window.location.pathname + '#promo';
-    navigator.clipboard.writeText(promoUrl).then(() => {
-        alert('✅ Enlace promocional con afiche copiado: ' + promoUrl);
+    const directImageUrl = window.location.origin + '/rapidtuy_promo_flyer.jpg';
+    navigator.clipboard.writeText(directImageUrl).then(() => {
+        alert('✅ Enlace directo a la imagen copiado: ' + directImageUrl);
     }).catch(() => {
-        alert('Enlace: ' + promoUrl);
+        alert('Enlace a la imagen: ' + directImageUrl);
     });
 }
 
@@ -51,8 +51,8 @@ async function shareRapidTuy() {
 document.addEventListener('DOMContentLoaded', () => {
     const advertisingQrImg = document.getElementById('advertisingQrImg');
     if (advertisingQrImg) {
-        const promoTargetUrl = window.location.origin + window.location.pathname + '#promo';
-        advertisingQrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(promoTargetUrl);
+        const directImageUrl = window.location.origin + '/rapidtuy_promo_flyer.jpg';
+        advertisingQrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(directImageUrl);
     }
 
     const originSelect = document.getElementById('origin');
