@@ -1,26 +1,15 @@
 {
-  "version": 2,
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/promo", "destination": "/rapidtuy_promo_flyer.jpg" },
+    { "source": "/flyer", "destination": "/flyer.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
-    }
-  ],
-  "routes": [
-    {
-      "src": "/promo",
-      "dest": "/rapidtuy_promo_flyer.jpg"
-    },
-    {
-      "src": "/flyer",
-      "dest": "/flyer.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
     }
   ]
 }
