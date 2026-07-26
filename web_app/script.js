@@ -1,3 +1,20 @@
+function openPromoModal() {
+    const modal = document.getElementById('promoModal');
+    if (modal) modal.style.display = 'flex';
+}
+function closePromoModal() {
+    const modal = document.getElementById('promoModal');
+    if (modal) modal.style.display = 'none';
+}
+function copyPromoUrl() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        alert('✅ Enlace copiado al portapapeles: ' + url);
+    }).catch(() => {
+        alert('Enlace: ' + url);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const originSelect = document.getElementById('origin');
     const destinationSelect = document.getElementById('destination');

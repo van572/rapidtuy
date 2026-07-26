@@ -1514,11 +1514,11 @@ fun HeaderBar(
                         onClick = { onTabSelected(2) }
                     )
                     TabButton(
-                        text = "QR e Imagen",
-                        icon = Icons.Default.QrCode,
+                        text = "Área Publicitaria",
+                        icon = Icons.Default.Campaign,
                         selected = currentTab == 3,
                         modifier = Modifier
-                            .weight(1f)
+                            .weight(1.1f)
                             .testTag("tab_promo"),
                         onClick = { onTabSelected(3) }
                     )
@@ -1542,11 +1542,11 @@ fun HeaderBar(
                         onClick = { onTabSelected(2) }
                     )
                     TabButton(
-                        text = "QR e Imagen",
-                        icon = Icons.Default.QrCode,
+                        text = "Área Publicitaria",
+                        icon = Icons.Default.Campaign,
                         selected = currentTab == 3,
                         modifier = Modifier
-                            .weight(1f)
+                            .weight(1.1f)
                             .testTag("tab_promo"),
                         onClick = { onTabSelected(3) }
                     )
@@ -1580,8 +1580,8 @@ fun HeaderBar(
                         onClick = { onTabSelected(2) }
                     )
                     TabButton(
-                        text = "QR e Imagen",
-                        icon = Icons.Default.QrCode,
+                        text = "Área Publicitaria",
+                        icon = Icons.Default.Campaign,
                         selected = currentTab == 3,
                         modifier = Modifier
                             .weight(1.1f)
@@ -5865,41 +5865,53 @@ fun BeautifulQRCode(
 @Composable
 fun PromotionBannerDialog(
     activeUrl: String = "https://ais-pre-k7q6427t2vsl3nsbjp7e4k-437635375840.us-west2.run.app",
+    imageResId: Int = R.drawable.rapidtuy_promo_flyer,
+    bannerTitle: String = "AFICHE PUBLICITARIO OFICIAL",
     onDismiss: () -> Unit
 ) {
     val uriHandler = androidx.compose.ui.platform.LocalUriHandler.current
+    val clipboardManager = androidx.compose.ui.platform.LocalClipboardManager.current
 
     Dialog(
         onDismissRequest = onDismiss
     ) {
         Card(
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFF0F172A)),
-            border = BorderStroke(1.5.dp, RapidTuyOrange),
+            border = BorderStroke(2.dp, RapidTuyOrange),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(4.dp)
         ) {
             Column(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                // Header Bar
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "PUBLICIDAD OFICIAL RAPIDTUY",
-                        color = RapidTuyOrange,
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 12.sp,
-                        letterSpacing = 1.sp
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        Icon(Icons.Default.Campaign, contentDescription = null, tint = RapidTuyOrange, modifier = Modifier.size(20.dp))
+                        Text(
+                            text = bannerTitle.uppercase(),
+                            color = RapidTuyOrange,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 11.sp,
+                            letterSpacing = 0.5.sp
+                        )
+                    }
                     IconButton(
                         onClick = onDismiss,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(28.dp).background(Color(0xFF1E293B), CircleShape)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Close,
@@ -5909,59 +5921,155 @@ fun PromotionBannerDialog(
                         )
                     }
                 }
-                
+
+                // Main High-Res Image Display
                 Image(
-                    painter = painterResource(id = R.drawable.rapidtuy_promo_flyer),
-                    contentDescription = "Folleto Promocional con QR de RapidTuy",
+                    painter = painterResource(id = imageResId),
+                    contentDescription = "Imagen Publicitaria con QR RapidTuy",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(8.dp))
-                        .border(BorderStroke(1.dp, Color(0xFF334155)), RoundedCornerShape(8.dp)),
+                        .clip(RoundedCornerShape(12.dp))
+                        .border(BorderStroke(1.5.dp, Color(0xFF334155)), RoundedCornerShape(12.dp)),
                     contentScale = ContentScale.FillWidth
                 )
-                
-                Text(
-                    text = "¡Traslados rápidos y seguros en todos los Valles del Tuy! Contacto Directo: 0426 1215060",
-                    color = Color.White,
-                    fontSize = 11.sp,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold
-                )
 
-                Text(
-                    text = activeUrl,
-                    color = RapidTuyOrange,
-                    fontSize = 10.sp,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.SemiBold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-                
-                Row(
+                // Info Badge
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(0xFF1E293B), RoundedCornerShape(12.dp))
+                        .border(BorderStroke(1.dp, Color(0xFF334155)), RoundedCornerShape(12.dp))
+                        .padding(10.dp)
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Text(
+                            text = "¡TRASLADOS EN MOTO TAXI RÁPIDOS Y SEGUROS!",
+                            color = Color.White,
+                            fontSize = 11.sp,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Black
+                        )
+                        Text(
+                            text = "📍 Cobertura: Charallave, Ocumare del Tuy, Cúa, Santa Lucía, Yare",
+                            color = Color(0xFF38BDF8),
+                            fontSize = 10.sp,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Text(
+                            text = "📞 Central de Atencion: 0426 1215060",
+                            color = Color(0xFF10B981),
+                            fontSize = 11.sp,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+
+                // Embedded QR Code Section for entering this image/landing
+                Card(
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+                    border = BorderStroke(1.dp, RapidTuyOrange.copy(alpha = 0.6f)),
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(
+                        modifier = Modifier.padding(12.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = "CÓDIGO QR DE ENTRADA A ESTA IMAGEN & PLATAFORMA",
+                            fontSize = 9.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = RapidTuyOrange,
+                            letterSpacing = 0.5.sp
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .background(Color.White, RoundedCornerShape(12.dp))
+                                .padding(10.dp)
+                                .border(BorderStroke(3.dp, RapidTuyOrange), RoundedCornerShape(12.dp))
+                        ) {
+                            BeautifulQRCode(
+                                modifier = Modifier.size(150.dp),
+                                url = activeUrl,
+                                onClick = {
+                                    try {
+                                        uriHandler.openUri(activeUrl)
+                                    } catch (_: Exception) {}
+                                }
+                            )
+                        }
+
+                        Text(
+                            text = activeUrl,
+                            color = Color(0xFF94A3B8),
+                            fontSize = 9.sp,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+
+                // Action Buttons
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Button(
                         onClick = {
                             try {
-                                uriHandler.openUri(activeUrl)
+                                val waUrl = "https://wa.me/584261215060?text=Hola%20RapidTuy%20vi%20el%20afiche%20publicitario%20y%20deseo%20solicitar%20un%20servicio"
+                                uriHandler.openUri(waUrl)
                             } catch (_: Exception) {}
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
-                        modifier = Modifier.weight(1f)
+                        shape = RoundedCornerShape(10.dp),
+                        modifier = Modifier.fillMaxWidth().height(40.dp)
                     ) {
-                        Icon(Icons.Default.OpenInBrowser, contentDescription = null, modifier = Modifier.size(14.dp), tint = Color.White)
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text("Visitar Página Real", fontSize = 11.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                        Icon(Icons.Default.PhoneAndroid, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.White)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text("Contactar por WhatsApp (0426 1215060)", fontSize = 11.sp, color = Color.White, fontWeight = FontWeight.Bold)
                     }
 
-                    Button(
-                        onClick = onDismiss,
-                        colors = ButtonDefaults.buttonColors(containerColor = RapidTuyOrange),
-                        modifier = Modifier.weight(1f)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text("Cerrar", fontSize = 11.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                        Button(
+                            onClick = {
+                                try {
+                                    uriHandler.openUri(activeUrl)
+                                } catch (_: Exception) {}
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = RapidTuyOrange),
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.weight(1f).height(38.dp)
+                        ) {
+                            Icon(Icons.Default.OpenInBrowser, contentDescription = null, modifier = Modifier.size(14.dp), tint = Color.White)
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text("Abrir Web", fontSize = 11.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                        }
+
+                        OutlinedButton(
+                            onClick = {
+                                clipboardManager.setText(androidx.compose.ui.text.AnnotatedString(activeUrl))
+                            },
+                            border = BorderStroke(1.dp, Color(0xFF334155)),
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White),
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.weight(1f).height(38.dp)
+                        ) {
+                            Icon(Icons.Default.ContentCopy, contentDescription = null, modifier = Modifier.size(14.dp), tint = Color.White)
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text("Copiar QR Link", fontSize = 11.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                        }
                     }
                 }
             }
@@ -8173,10 +8281,19 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
     val uriHandler = androidx.compose.ui.platform.LocalUriHandler.current
     val clipboardManager = androidx.compose.ui.platform.LocalClipboardManager.current
 
+    // Banners Available in App
+    val banners = listOf(
+        Triple(R.drawable.rapidtuy_promo_flyer, "Folleto Oficial Moto Taxi RapidTuy", "Cobertura Completa: Charallave, Ocumare, Cúa, Santa Lucía, Yare | Contacto: 0426 1215060"),
+        Triple(R.drawable.rapidtuy_banner, "Banner Corporativo Red de Mototaxis", "Central de Servicios de Traslados de Pasajeros y Encomiendas"),
+        Triple(R.drawable.rapidtuy_web_banner_1785008210218, "Banner Publicitario Express Valles del Tuy", "Validación QR, Conductores Verificados y Despacho Inmediato")
+    )
+
+    var selectedBannerIndex by remember { mutableStateOf(0) }
+
     // Real App & Portal URLs
     val liveWebAppUrl = "https://ais-dev-k7q6427t2vsl3nsbjp7e4k-437635375840.us-west2.run.app"
     val sharedAppUrl = "https://ais-pre-k7q6427t2vsl3nsbjp7e4k-437635375840.us-west2.run.app"
-    val whatsappCentralUrl = "https://wa.me/584261215060?text=Hola%20RapidTuy%20deseo%20solicitar%20un%20servicio%20de%20moto"
+    val whatsappCentralUrl = "https://wa.me/584261215060?text=Hola%20RapidTuy%20vi%20el%20afiche%20publicitario%20y%20deseo%20solicitar%20un%20servicio"
 
     var selectedUrlType by remember { mutableStateOf("WEB_APP") } // "WEB_APP", "SHARED_APP", "WHATSAPP", "CUSTOM_VERCEL"
     var customUrlInput by remember { mutableStateOf("") }
@@ -8197,16 +8314,34 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // Main Screen Header
         item {
-            Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .background(primaryColor.copy(alpha = 0.2f), CircleShape)
+                            .border(BorderStroke(1.dp, primaryColor), CircleShape),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(Icons.Default.Campaign, contentDescription = null, tint = primaryColor, modifier = Modifier.size(22.dp))
+                    }
+                    Text(
+                        text = "ÁREA PUBLICITARIA & CÓDIGOS QR",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Black,
+                        color = Color.White
+                    )
+                }
                 Text(
-                    text = "QR Publicitario y Página Web Real",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Black,
-                    color = Color.White
-                )
-                Text(
-                    text = "Generación de código QR dinámico apuntando a las plataformas oficiales de RapidTuy",
+                    text = "Seleccione o cree códigos QR personalizados para acceder directamente a las imágenes y afiches promocionales oficiales de RapidTuy",
                     fontSize = 12.sp,
                     color = Color(0xFF94A3B8),
                     textAlign = TextAlign.Center
@@ -8214,7 +8349,121 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
             }
         }
 
-        // URL Target Selection Card
+        // Section 1: Banner / Image Selector Gallery
+        item {
+            Card(
+                colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+                border = BorderStroke(1.dp, Color(0xFF334155)),
+                shape = RoundedCornerShape(16.dp),
+                modifier = Modifier.fillMaxWidth().testTag("advertising_gallery_card")
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "GALERÍA DE AFICHES Y BANNERS",
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            color = primaryColor,
+                            letterSpacing = 1.sp
+                        )
+                        Text(
+                            text = "${selectedBannerIndex + 1} de ${banners.size}",
+                            fontSize = 10.sp,
+                            color = Color(0xFF94A3B8),
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    // Horizontal Banner Carousel Thumbnails
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        banners.forEachIndexed { idx, (resId, title, _) ->
+                            val isSelected = (selectedBannerIndex == idx)
+                            Card(
+                                colors = CardDefaults.cardColors(
+                                    containerColor = if (isSelected) primaryColor.copy(alpha = 0.2f) else Color(0xFF0F172A)
+                                ),
+                                border = BorderStroke(
+                                    if (isSelected) 2.dp else 1.dp,
+                                    if (isSelected) primaryColor else Color(0xFF334155)
+                                ),
+                                shape = RoundedCornerShape(12.dp),
+                                modifier = Modifier
+                                    .width(200.dp)
+                                    .clickable { selectedBannerIndex = idx }
+                            ) {
+                                Column(modifier = Modifier.padding(8.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                    Image(
+                                        painter = painterResource(id = resId),
+                                        contentDescription = title,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(85.dp)
+                                            .clip(RoundedCornerShape(8.dp)),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                    Text(
+                                        text = title,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isSelected) primaryColor else Color.White,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    // Display Selected Banner Card Detail
+                    val currentBanner = banners[selectedBannerIndex]
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(0xFF0F172A), RoundedCornerShape(12.dp))
+                            .border(BorderStroke(1.dp, Color(0xFF334155)), RoundedCornerShape(12.dp))
+                            .padding(12.dp)
+                    ) {
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text(
+                                text = currentBanner.second,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Black,
+                                color = Color.White
+                            )
+                            Text(
+                                text = currentBanner.third,
+                                fontSize = 11.sp,
+                                color = Color(0xFF94A3B8)
+                            )
+                            Button(
+                                onClick = { showPromotionDialog = true },
+                                colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier.fillMaxWidth().height(42.dp).testTag("btn_enter_banner_image")
+                            ) {
+                                Icon(Icons.Default.CropFree, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.White)
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text("🖼️ Entrar a la Imagen Publicitaria", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Section 2: Destination Link Selector for the Advertising QR Code
         item {
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
@@ -8227,14 +8476,13 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
-                        text = "DESTINO DEL CÓDIGO QR PUBLICITARIO:",
+                        text = "ENLACE OBJETIVO PARA EL CÓDIGO QR PUBLICITARIO:",
                         fontSize = 10.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = primaryColor,
                         letterSpacing = 1.sp
                     )
 
-                    // Buttons for selecting URL target
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -8252,7 +8500,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                     Icon(Icons.Default.Language, contentDescription = null, modifier = Modifier.size(14.dp))
-                                    Text("App Dev Live", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                    Text("App Web Live", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
 
@@ -8268,7 +8516,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                             ) {
                                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                                     Icon(Icons.Default.PhoneAndroid, contentDescription = null, modifier = Modifier.size(14.dp))
-                                    Text("WhatsApp", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                    Text("WhatsApp Central", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
                         }
@@ -8285,7 +8533,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                 Icon(Icons.Default.Public, contentDescription = null, modifier = Modifier.size(14.dp))
-                                Text("Web Personalizada / Vercel", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                Text("Web Personalizada / Landing Page Vercel", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                             }
                         }
 
@@ -8324,7 +8572,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Column(modifier = Modifier.weight(1f)) {
-                                Text("Enlace Objetivo Seleccionado:", fontSize = 9.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
+                                Text("Enlace Configurado:", fontSize = 9.sp, color = Color(0xFF64748B), fontWeight = FontWeight.Bold)
                                 Text(
                                     activeRealUrl,
                                     fontSize = 11.sp,
@@ -8349,7 +8597,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
             }
         }
 
-        // QR Code Main Display Card
+        // Section 3: QR Code Live Generator Display Card
         item {
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
@@ -8363,7 +8611,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
                     Text(
-                        text = "CÓDIGO QR PUBLICITARIO ESCANEABLE",
+                        text = "CÓDIGO QR PUBLICITARIO PARA LA IMAGEN",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.ExtraBold,
                         color = primaryColor,
@@ -8375,25 +8623,17 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                             .background(Color.White, RoundedCornerShape(16.dp))
                             .padding(16.dp)
                             .border(BorderStroke(4.dp, primaryColor), RoundedCornerShape(16.dp))
-                            .clickable {
-                                try {
-                                    uriHandler.openUri(activeRealUrl)
-                                } catch (_: Exception) {}
-                            }
+                            .clickable { showPromotionDialog = true }
                     ) {
                         BeautifulQRCode(
                             modifier = Modifier.size(200.dp),
                             url = activeRealUrl,
-                            onClick = {
-                                try {
-                                    uriHandler.openUri(activeRealUrl)
-                                } catch (_: Exception) {}
-                            }
+                            onClick = { showPromotionDialog = true }
                         )
                     }
 
                     Text(
-                        text = "Escanee con la cámara de su teléfono para ingresar directamente",
+                        text = "Toque el código QR o use la cámara de su teléfono para entrar directamente al afiche publicitario e imagen oficial",
                         fontSize = 11.sp,
                         color = Color(0xFF94A3B8),
                         textAlign = TextAlign.Center
@@ -8404,40 +8644,39 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Button(
+                            onClick = { showPromotionDialog = true },
+                            colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.weight(1.2f).height(44.dp).testTag("btn_enter_image_dialog")
+                        ) {
+                            Icon(Icons.Default.CropFree, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.White)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("Entrar a la Imagen", fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                        }
+
+                        Button(
                             onClick = {
                                 try {
                                     uriHandler.openUri(activeRealUrl)
                                     viewModel.logSystemEvent("Abriendo página real: $activeRealUrl")
                                 } catch (_: Exception) {}
                             },
-                            colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF334155)),
                             shape = RoundedCornerShape(10.dp),
                             modifier = Modifier.weight(1f).height(44.dp).testTag("btn_open_real_web_page")
                         ) {
                             Icon(Icons.Default.OpenInBrowser, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.White)
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Abrir Página Real", fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
-                        }
-
-                        Button(
-                            onClick = {
-                                showPromotionDialog = true
-                            },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF334155)),
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier.weight(1f).height(44.dp).testTag("btn_view_full_flyer")
-                        ) {
-                            Icon(Icons.Default.Campaign, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.White)
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text("Ver Afiche", fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                            Text("Abrir Web", fontSize = 12.sp, color = Color.White, fontWeight = FontWeight.Bold)
                         }
                     }
                 }
             }
         }
 
-        // Promotional Flyer Image Card
+        // Section 4: Main Promotional Flyer Card Showcase
         item {
+            val currentBanner = banners[selectedBannerIndex]
             Card(
                 colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
                 border = BorderStroke(1.dp, Color(0xFF334155)),
@@ -8455,7 +8694,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Folleto Publicitario Oficial RapidTuy",
+                            text = currentBanner.second,
                             fontSize = 13.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White
@@ -8470,8 +8709,8 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                     }
 
                     Image(
-                        painter = painterResource(id = R.drawable.rapidtuy_promo_flyer),
-                        contentDescription = "Folleto Promocional de RapidTuy",
+                        painter = painterResource(id = currentBanner.first),
+                        contentDescription = currentBanner.second,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(12.dp))
@@ -8488,7 +8727,7 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
                     ) {
                         Icon(Icons.Default.ZoomIn, contentDescription = null, modifier = Modifier.size(16.dp), tint = Color.White)
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Ampliar Folleto e Imprimir QR", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text("Ampliar Imagen con QR Integrado", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.White)
                     }
                 }
             }
@@ -8496,8 +8735,11 @@ fun PromoDownloadScreen(viewModel: RapidTuyViewModel) {
     }
 
     if (showPromotionDialog) {
+        val currentBanner = banners[selectedBannerIndex]
         PromotionBannerDialog(
             activeUrl = activeRealUrl,
+            imageResId = currentBanner.first,
+            bannerTitle = currentBanner.second,
             onDismiss = { showPromotionDialog = false }
         )
     }
