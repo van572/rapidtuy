@@ -569,3 +569,36 @@ footer {
     font-size: 0.95rem;
     border-top: 1px solid var(--card-border);
 }
+
+/* FLOATING SHARE BUTTON */
+.floating-share-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+    padding: 12px 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4), 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.floating-share-btn:hover {
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 14px 32px rgba(37, 211, 102, 0.6), 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.floating-share-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+

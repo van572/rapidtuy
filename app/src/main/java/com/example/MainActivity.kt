@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
@@ -202,6 +203,49 @@ fun RapidTuyAppContainer(
                     .align(Alignment.TopCenter)
                     .padding(top = 4.dp)
             )
+
+            // Global Floating Share RapidTuy Button
+            val context = LocalContext.current
+            FloatingActionButton(
+                onClick = {
+                    val shareIntent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(android.content.Intent.EXTRA_SUBJECT, "RapidTuy - Mototaxis Valles del Tuy")
+                        putExtra(
+                            android.content.Intent.EXTRA_TEXT,
+                            "¡Pide tu moto taxi rápido y seguro en los Valles del Tuy con RapidTuy! Accede a la aplicación aquí: https://ais-pre-k7q6427t2vsl3nsbjp7e4k-437635375840.us-west2.run.app"
+                        )
+                    }
+                    context.startActivity(android.content.Intent.createChooser(shareIntent, "Compartir RapidTuy por mensajería"))
+                },
+                containerColor = Color(0xFF25D366),
+                contentColor = Color.White,
+                shape = RoundedCornerShape(28.dp),
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 16.dp, bottom = 16.dp)
+                    .shadow(8.dp, RoundedCornerShape(28.dp))
+                    .testTag("floating_share_button")
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = "Compartir RapidTuy",
+                        tint = Color.White,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Text(
+                        text = "Compartir RapidTuy",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.sp,
+                        color = Color.White
+                    )
+                }
+            }
         }
     }
 

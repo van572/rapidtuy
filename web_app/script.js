@@ -15,6 +15,32 @@ function copyPromoUrl() {
     });
 }
 
+async function shareRapidTuy() {
+    const shareData = {
+        title: 'RapidTuy - Mototaxis Valles del Tuy',
+        text: '¡Pide tu moto taxi rápido y seguro en los Valles del Tuy con RapidTuy! Cotiza tu viaje y contacta a la central aquí:',
+        url: window.location.href || 'https://ais-pre-k7q6427t2vsl3nsbjp7e4k-437635375840.us-west2.run.app'
+    };
+
+    if (navigator.share) {
+        try {
+            await navigator.share(shareData);
+        } catch (err) {
+            console.log('Error o cancelación en Web Share API:', err);
+        }
+    } else {
+        const textToShare = encodeURIComponent(`${shareData.text} ${shareData.url}`);
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${textToShare}`;
+        if (confirm('✅ ¿Deseas abrir WhatsApp para enviar el enlace de RapidTuy a tus contactos?')) {
+            window.open(whatsappUrl, '_blank');
+        } else {
+            navigator.clipboard.writeText(shareData.url).then(() => {
+                alert('📋 ¡Enlace de RapidTuy copiado al portapapeles! Puedes enviarlo por tu aplicación de mensajería preferida.');
+            });
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const originSelect = document.getElementById('origin');
     const destinationSelect = document.getElementById('destination');
