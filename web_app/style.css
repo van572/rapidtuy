@@ -206,6 +206,54 @@ header {
     box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
 }
 
+        .btn-gps-origin {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+            padding: 10px 14px !important;
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+            width: 100% !important;
+            margin-top: 8px !important;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
+            transition: all 0.25s ease !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+        }
+
+        .btn-gps-origin:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5) !important;
+        }
+
+        .btn-gps-dest {
+            background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+            padding: 10px 14px !important;
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+            width: 100% !important;
+            margin-top: 8px !important;
+            box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3) !important;
+            transition: all 0.25s ease !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 6px !important;
+        }
+
+        .btn-gps-dest:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5) !important;
+        }
+
 .btn-secondary {
     background-color: var(--card-bg);
     color: var(--text-light);

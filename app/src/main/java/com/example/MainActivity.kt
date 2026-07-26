@@ -3096,23 +3096,23 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                             Box(
                                 modifier = Modifier
                                     .background(
-                                        if (isSelected) RapidTuyOrange.copy(alpha = 0.2f) else Color(0xFF0F172A),
-                                        RoundedCornerShape(8.dp)
+                                        if (isSelected) RapidTuyOrange.copy(alpha = 0.25f) else Color(0xFF0F172A),
+                                        RoundedCornerShape(10.dp)
                                     )
                                     .border(
-                                        BorderStroke(1.dp, if (isSelected) RapidTuyOrange else Color(0xFF334155)),
-                                        RoundedCornerShape(8.dp)
+                                        BorderStroke(1.dp, if (isSelected) RapidTuyOrange else Color(0xFF2A364F)),
+                                        RoundedCornerShape(10.dp)
                                     )
                                     .clickable {
                                         originSelected = origen
                                         destinationSelected = destino
                                         tripFare = fare.toString()
                                     }
-                                    .padding(horizontal = 8.dp, vertical = 5.dp)
+                                    .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
                                 Text(
-                                    text = "${origen.take(12)}.. ➔ ${destino.take(10)}..",
-                                    fontSize = 9.sp,
+                                    text = "${origen.take(14)}.. ➔ ${destino.take(12)}..",
+                                    fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = if (isSelected) RapidTuyOrange else Color.White
                                 )
@@ -3132,7 +3132,7 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         listOf(
                             "Charallave Centro / Ferrocarril",
@@ -3147,17 +3147,17 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                             val isSel = (originSelected == loc)
                             Box(
                                 modifier = Modifier
-                                    .background(if (isSel) RapidTuyOrange.copy(alpha = 0.3f) else Color(0xFF0F172A), RoundedCornerShape(6.dp))
-                                    .border(BorderStroke(1.dp, if (isSel) RapidTuyOrange else Color(0xFF334155)), RoundedCornerShape(6.dp))
+                                    .background(if (isSel) RapidTuyOrange.copy(alpha = 0.3f) else Color(0xFF0F172A), RoundedCornerShape(10.dp))
+                                    .border(BorderStroke(1.dp, if (isSel) RapidTuyOrange else Color(0xFF2A364F)), RoundedCornerShape(10.dp))
                                     .clickable { originSelected = loc }
-                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                                    .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
-                                Text(loc, fontSize = 9.sp, color = if (isSel) RapidTuyOrange else Color.White, fontWeight = FontWeight.SemiBold)
+                                Text(loc, fontSize = 10.sp, color = if (isSel) RapidTuyOrange else Color.White, fontWeight = FontWeight.SemiBold)
                             }
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Button(
                         onClick = {
@@ -3175,16 +3175,16 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                             }
                         },
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
-                        shape = RoundedCornerShape(8.dp),
-                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 6.dp),
-                        modifier = Modifier.fillMaxWidth()
+                        shape = RoundedCornerShape(12.dp),
+                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
+                        modifier = Modifier.fillMaxWidth().shadow(4.dp, RoundedCornerShape(12.dp))
                     ) {
                         Icon(Icons.Default.MyLocation, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
                         Text("📡 Capturar mi GPS en Vivo para Origen", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
                     }
 
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     OutlinedTextField(
                         value = originSelected,
@@ -3192,6 +3192,7 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                         label = { Text("Punto de Origen", color = Color(0xFF94A3B8)) },
                         leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = null, tint = RapidTuyOrange) },
                         modifier = Modifier.fillMaxWidth().testTag("dispatch_origin_input"),
+                        shape = RoundedCornerShape(12.dp),
                         textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = RapidTuyOrange,
@@ -3213,7 +3214,7 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
                         listOf(
                             "Charallave Centro / Ferrocarril",
@@ -3228,17 +3229,17 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                             val isSel = (destinationSelected == loc)
                             Box(
                                 modifier = Modifier
-                                    .background(if (isSel) RapidTuyOrange.copy(alpha = 0.3f) else Color(0xFF0F172A), RoundedCornerShape(6.dp))
-                                    .border(BorderStroke(1.dp, if (isSel) RapidTuyOrange else Color(0xFF334155)), RoundedCornerShape(6.dp))
+                                    .background(if (isSel) RapidTuyOrange.copy(alpha = 0.3f) else Color(0xFF0F172A), RoundedCornerShape(10.dp))
+                                    .border(BorderStroke(1.dp, if (isSel) RapidTuyOrange else Color(0xFF2A364F)), RoundedCornerShape(10.dp))
                                     .clickable { destinationSelected = loc }
-                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                                    .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
-                                Text(loc, fontSize = 9.sp, color = if (isSel) RapidTuyOrange else Color.White, fontWeight = FontWeight.SemiBold)
+                                Text(loc, fontSize = 10.sp, color = if (isSel) RapidTuyOrange else Color.White, fontWeight = FontWeight.SemiBold)
                             }
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Button(
                         onClick = {
@@ -3255,17 +3256,17 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                                 viewModel.logSystemEvent("GPS Destino Capturado: $gpsLoc")
                             }
                         },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF38BDF8)),
-                        shape = RoundedCornerShape(8.dp),
-                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 6.dp),
-                        modifier = Modifier.fillMaxWidth()
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0EA5E9)),
+                        shape = RoundedCornerShape(12.dp),
+                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
+                        modifier = Modifier.fillMaxWidth().shadow(4.dp, RoundedCornerShape(12.dp))
                     ) {
                         Icon(Icons.Default.MyLocation, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
                         Text("📡 Capturar mi GPS en Vivo para Destino", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
                     }
 
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     OutlinedTextField(
                         value = destinationSelected,
@@ -3273,6 +3274,7 @@ fun AdminPanelScreen(viewModel: RapidTuyViewModel) {
                         label = { Text("Punto de Destino", color = Color(0xFF94A3B8)) },
                         leadingIcon = { Icon(Icons.Default.Navigation, contentDescription = null, tint = RapidTuyOrange) },
                         modifier = Modifier.fillMaxWidth().testTag("dispatch_destination_input"),
+                        shape = RoundedCornerShape(12.dp),
                         textStyle = androidx.compose.ui.text.TextStyle(color = Color.White),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = RapidTuyOrange,
@@ -6522,23 +6524,23 @@ fun YummySuperAppHub(
                             Box(
                                 modifier = Modifier
                                     .background(
-                                        if (isSelectedRoute) primaryColor.copy(alpha = 0.2f) else Color(0xFF0F172A),
-                                        RoundedCornerShape(8.dp)
+                                        if (isSelectedRoute) primaryColor.copy(alpha = 0.25f) else Color(0xFF0F172A),
+                                        RoundedCornerShape(10.dp)
                                     )
                                     .border(
-                                        BorderStroke(1.dp, if (isSelectedRoute) primaryColor else Color(0xFF334155)),
-                                        RoundedCornerShape(8.dp)
+                                        BorderStroke(1.dp, if (isSelectedRoute) primaryColor else Color(0xFF2A364F)),
+                                        RoundedCornerShape(10.dp)
                                     )
                                     .clickable {
                                         originSelected = orig
                                         destinationSelected = dest
                                         clientName = pName
                                     }
-                                    .padding(horizontal = 8.dp, vertical = 6.dp)
+                                    .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
                                 Text(
                                     text = "${orig.substringBefore(" ")} ➔ ${dest.substringBefore(" ")}",
-                                    fontSize = 9.sp,
+                                    fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = if (isSelectedRoute) primaryColor else Color.White
                                 )
@@ -6546,12 +6548,12 @@ fun YummySuperAppHub(
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
 
                     val currCtx = LocalContext.current
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Button(
                             onClick = {
@@ -6560,13 +6562,13 @@ fun YummySuperAppHub(
                                 }
                             },
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
-                            shape = RoundedCornerShape(8.dp),
-                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
-                            modifier = Modifier.weight(1f)
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+                            modifier = Modifier.weight(1f).shadow(4.dp, RoundedCornerShape(12.dp))
                         ) {
-                            Icon(Icons.Default.MyLocation, contentDescription = null, tint = Color.White, modifier = Modifier.size(14.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("GPS Origen", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                            Icon(Icons.Default.MyLocation, contentDescription = null, tint = Color.White, modifier = Modifier.size(15.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("GPS Origen", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
                         }
 
                         Button(
@@ -6575,18 +6577,18 @@ fun YummySuperAppHub(
                                     destinationSelected = gpsLoc
                                 }
                             },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF38BDF8)),
-                            shape = RoundedCornerShape(8.dp),
-                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
-                            modifier = Modifier.weight(1f)
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0EA5E9)),
+                            shape = RoundedCornerShape(12.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+                            modifier = Modifier.weight(1f).shadow(4.dp, RoundedCornerShape(12.dp))
                         ) {
-                            Icon(Icons.Default.MyLocation, contentDescription = null, tint = Color.White, modifier = Modifier.size(14.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("GPS Destino", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                            Icon(Icons.Default.MyLocation, contentDescription = null, tint = Color.White, modifier = Modifier.size(15.dp))
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text("GPS Destino", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(6.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     OutlinedTextField(
                         value = originSelected,
@@ -6594,6 +6596,7 @@ fun YummySuperAppHub(
                         label = { Text("Origen (Punto de salida)", fontSize = 10.sp, color = Color(0xFF94A3B8)) },
                         leadingIcon = { Icon(Icons.Default.LocationOn, contentDescription = null, tint = primaryColor, modifier = Modifier.size(16.dp)) },
                         modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
                         textStyle = androidx.compose.ui.text.TextStyle(color = Color.White, fontSize = 11.sp),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = primaryColor,
@@ -6611,6 +6614,7 @@ fun YummySuperAppHub(
                         label = { Text("Destino Final", fontSize = 10.sp, color = Color(0xFF94A3B8)) },
                         leadingIcon = { Icon(Icons.Default.Navigation, contentDescription = null, tint = primaryColor, modifier = Modifier.size(16.dp)) },
                         modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
                         textStyle = androidx.compose.ui.text.TextStyle(color = Color.White, fontSize = 11.sp),
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = primaryColor,
