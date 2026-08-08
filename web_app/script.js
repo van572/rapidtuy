@@ -1,27 +1,3 @@
-function openPromoModal() {
-    const modal = document.getElementById('promoModal');
-    if (modal) modal.style.display = 'flex';
-}
-function closePromoModal() {
-    const modal = document.getElementById('promoModal');
-    if (modal) modal.style.display = 'none';
-}
-function copyPromoUrl() {
-    const flyerUrl = window.location.origin + '/flyer.html';
-    navigator.clipboard.writeText(flyerUrl).then(() => {
-        alert('✅ Enlace a la página del afiche copiado: ' + flyerUrl);
-    }).catch(() => {
-        alert('Enlace del afiche: ' + flyerUrl);
-    });
-}
-
-// Check URL hash on page load to open promo modal if scanned via QR (#promo or #areaPublicitaria)
-window.addEventListener('load', () => {
-    if (window.location.hash === '#promo' || window.location.hash === '#areaPublicitaria' || window.location.search.includes('promo=1')) {
-        openPromoModal();
-    }
-});
-
 async function shareRapidTuy() {
     const shareData = {
         title: 'RapidTuy - Mototaxis Valles del Tuy',
